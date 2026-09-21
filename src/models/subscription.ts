@@ -32,6 +32,10 @@ import {
   CreditCardPaymentProfile,
   creditCardPaymentProfileSchema,
 } from './creditCardPaymentProfile.js';
+import {
+  ApplePayPaymentProfile,
+  applePayPaymentProfileSchema,
+} from './applePayPaymentProfile.js';
 import { Customer, customerSchema } from './customer.js';
 import {
   NestedSubscriptionGroup,
@@ -129,6 +133,7 @@ export interface Subscription {
   customer?: Customer;
   product?: Product;
   creditCard?: CreditCardPaymentProfile;
+  applePay?: ApplePayPaymentProfile;
   group?: NestedSubscriptionGroup | null;
   bankAccount?: BankAccountPaymentProfile;
   /** The payment profile type for the active profile on file. */
@@ -243,6 +248,7 @@ export const subscriptionSchema: Schema<Subscription> = lazy(() =>
     customer: ['customer', optional(customerSchema)],
     product: ['product', optional(productSchema)],
     creditCard: ['credit_card', optional(creditCardPaymentProfileSchema)],
+    applePay: ['apple_pay', optional(applePayPaymentProfileSchema)],
     group: ['group', optional(nullable(nestedSubscriptionGroupSchema))],
     bankAccount: ['bank_account', optional(bankAccountPaymentProfileSchema)],
     paymentType: ['payment_type', optional(nullable(string()))],
