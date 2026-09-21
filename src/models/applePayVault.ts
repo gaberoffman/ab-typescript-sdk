@@ -11,11 +11,11 @@ import { Schema, stringEnum } from '../schema.js';
  */
 export enum ApplePayVault {
   BraintreeBlue = 'braintree_blue',
+  MaxioPayments = 'maxp',
 }
 
 /**
  * Schema for ApplePayVault
  */
-export const applePayVaultSchema: Schema<ApplePayVault> = stringEnum(
-  ApplePayVault
-);
+export const applePayVaultSchema: Schema<ApplePayVault> =
+  stringEnum(ApplePayVault);
