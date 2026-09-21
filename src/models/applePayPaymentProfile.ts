@@ -14,6 +14,7 @@ import {
 } from '../schema.js';
 import { ApplePayVault, applePayVaultSchema } from './applePayVault.js';
 import { PaymentType, paymentTypeSchema } from './paymentType.js';
+import { cardTypeSchema } from './cardType.js';
 
 export interface ApplePayPaymentProfile {
   /** The Chargify-assigned ID of the Apple Pay payment profile. */
@@ -51,11 +52,15 @@ export interface ApplePayPaymentProfile {
   [key: string]: unknown;
 }
 
-export const applePayPaymentProfileSchema: Schema<ApplePayPaymentProfile> = expandoObject(
-  {
+export const applePayPaymentProfileSchema: Schema<ApplePayPaymentProfile> =
+  expandoObject({
     id: ['id', optional(number())],
     firstName: ['first_name', optional(string())],
     lastName: ['last_name', optional(string())],
+    maskedCardNumber: ['masked_card_number', optional(string())],
+    cardType: ['card_type', optional(nullable(cardTypeSchema))],
+    expirationMonth: ['expiration_month', optional(number())],
+    expirationYear: ['expiration_year', optional(number())],
     customerId: ['customer_id', optional(number())],
     currentVault: ['current_vault', optional(applePayVaultSchema)],
     vaultToken: ['vault_token', optional(string())],
@@ -74,5 +79,4 @@ export const applePayPaymentProfileSchema: Schema<ApplePayPaymentProfile> = expa
     gatewayHandle: ['gateway_handle', optional(nullable(string()))],
     createdAt: ['created_at', optional(string())],
     updatedAt: ['updated_at', optional(string())],
-  }
-);
+  });
